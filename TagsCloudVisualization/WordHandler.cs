@@ -1,18 +1,28 @@
 namespace TagsCloudVisualization;
 
-public class WordHandler
+public interface IWordHandler
 {
-    private static readonly Dictionary<string, int> keyValueWords = [];
-
-    public static Dictionary<string, int> ProcessFile(IFileProcessor fileProcessor, string filePath)
+    public Dictionary<string, int> ProcessFile(string filePath);
+}
+public class WordHandler : IWordHandler
+{
+    public WordHandler(IMorphologicalAnalyzer morphologicalAnalyzer, IFileProcessor fileProcessor)
     {
-        var words = fileProcessor.ReadWords(filePath);
+        _morphologicalAnalyzer = morphologicalAnalyzer;
+        _fileProcessor = fileProcessor;
+    }
+    private readonly Dictionary<string, int> keyValueWords = [];
+    private readonly IMorphologicalAnalyzer _morphologicalAnalyzer;
+    private readonly IFileProcessor _fileProcessor;
+
+    public Dictionary<string, int> ProcessFile(string filePath)
+    {
+        var words = _fileProcessor.ReadWords(filePath);
 
         foreach (var word in words)
         {
             var normalizedWord = word.ToLower();
-
-            if (!MorphologicalProcessing.IsExcludedWord(word))
+            if (!_morphologicalAnalyzer.IsExcludedWord(word))
             {
                 if (keyValueWords.ContainsKey(normalizedWord))
                     keyValueWords[normalizedWord]++;

@@ -1,17 +1,24 @@
 using MyStemWrapper;
 namespace TagsCloudVisualization;
 
-public class MorphologicalProcessing
+public interface IMorphologicalAnalyzer
 {
-    public static bool IsExcludedWord(string word)
+    bool IsExcludedWord(string word);
+}
+
+public class MorphologicalProcessing : IMorphologicalAnalyzer
+{
+    private readonly MyStem _mystem;
+
+    public MorphologicalProcessing(MyStem mystem)
     {
-        var mystem = new MyStem();
-        mystem.PathToMyStem = "/Users/milana/di-updated/TagsCloudVisualization/mystem"; //перенести
-        mystem.Parameters = "-ni";
-        var res = mystem.Analysis(word);
-        if (res.Contains("CONJ") || res.Contains("INTJ") 
-        || res.Contains("PART") || res.Contains("PR") || res.Contains("SPRO"))
-            return true;
-        return false;
+        _mystem = mystem;
+    }
+
+    public bool IsExcludedWord(string word)
+    {
+        var res = _mystem.Analysis(word);
+        return res.Contains("CONJ") || res.Contains("INTJ") || res.Contains("PART")
+               || res.Contains("PR") || res.Contains("SPRO");
     }
 }

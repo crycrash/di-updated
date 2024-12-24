@@ -3,7 +3,12 @@ using Microsoft.Maui.Graphics.Skia;
 using TagsCloudVisualization;
 
 namespace DrawingTagsCloudVisualization;
-public class DrawingTagsCloud
+
+public interface IDrawingTagsCloud
+{
+    public void SaveToFile(string filePath);
+}
+public class DrawingTagsCloud : IDrawingTagsCloud
 {
     private List<RectangleInformation> rectangleInformation;
 

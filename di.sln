@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagsCloudVisualization", "T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsTagsCloudVisualization", "TestsTagsCloudVisualization\TestsTagsCloudVisualization.csproj", "{4B2F6F86-946B-45CB-8C86-78DB4027A02F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleClient", "ConsoleClient\ConsoleClient.csproj", "{9947D364-443F-43AB-A764-ED71B0DF06A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,5 +33,9 @@ Global
 		{4B2F6F86-946B-45CB-8C86-78DB4027A02F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B2F6F86-946B-45CB-8C86-78DB4027A02F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B2F6F86-946B-45CB-8C86-78DB4027A02F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9947D364-443F-43AB-A764-ED71B0DF06A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9947D364-443F-43AB-A764-ED71B0DF06A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9947D364-443F-43AB-A764-ED71B0DF06A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9947D364-443F-43AB-A764-ED71B0DF06A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

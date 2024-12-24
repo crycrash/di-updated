@@ -2,7 +2,11 @@ using System.Drawing;
 
 namespace TagsCloudVisualization;
 
-public class RectangleGenerator
+public interface IRectangleGenerator
+{
+    public List<RectangleInformation> ExecuteRectangles(Dictionary<string, int> frequencyRectangles, Point center);
+}
+public class RectangleGenerator : IRectangleGenerator
 {
     private static List<RectangleInformation> rectangleInformation = [];
     private static Dictionary<string, Size> rectangleData = [];
@@ -28,10 +32,9 @@ public class RectangleGenerator
         }
         return rectangleInformation;
     }
-    public static List<RectangleInformation> ExecuteRectangles(Dictionary<string, int> frequencyRectangles, Point center)
+    public List<RectangleInformation> ExecuteRectangles(Dictionary<string, int> frequencyRectangles, Point center)
     {
         GenerateRectangles(frequencyRectangles);
         return PutRectangles(center);
     }
-
 }

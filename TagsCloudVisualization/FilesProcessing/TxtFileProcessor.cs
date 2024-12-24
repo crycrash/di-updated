@@ -3,8 +3,10 @@ public class TxtFileProcessor : IFileProcessor
 {
     public IEnumerable<string> ReadWords(string filePath)
     {
-        if (!File.Exists(filePath))
+        if (!File.Exists(filePath)){
+            Console.WriteLine(filePath);
             throw new FileNotFoundException(filePath);
+        }
 
         return File.ReadLines(filePath)
                    .Select(line => line.Trim()) 
