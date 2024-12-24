@@ -1,0 +1,19 @@
+# 1 example:
+
+Agrs: dotnet run
+![alt text](example.png)
+
+# 2 example:
+
+Args: dotnet run -- -o example1.png -l 500 -w 500
+![alt text](example1.png)
+
+# 3 example:
+
+Args: dotnet run -- -o example2.png -x 150 -y 300
+![alt text](example2.png)
+
+# 4 example:
+
+Args: dotnet run -- -c pink -o Examples/example3.png
+![alt text](example3.png)

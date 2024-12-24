@@ -1,44 +1,51 @@
+using System.Runtime.CompilerServices;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Graphics.Skia;
+using Microsoft.VisualBasic;
 using TagsCloudVisualization;
 
 namespace DrawingTagsCloudVisualization;
 
 public interface IDrawingTagsCloud
 {
-    public void SaveToFile(string filePath);
+    public void SaveToFile(string filePath, int lenght, int width, string color);
 }
-public class DrawingTagsCloud : IDrawingTagsCloud
+public class DrawingTagsCloud(List<RectangleInformation> rectangleInformation) : IDrawingTagsCloud
 {
-    private List<RectangleInformation> rectangleInformation;
+    private readonly List<RectangleInformation> rectangleInformation = rectangleInformation;
 
-    public DrawingTagsCloud(List<RectangleInformation> rectangleInformation)
-    {
-        this.rectangleInformation = rectangleInformation;
-    }
+    private readonly Dictionary<string, Color> dictColors = new(){
+            { "white", Colors.White },
+            { "red", Colors.Red },
+            { "green", Colors.Green },
+            { "yellow", Colors.Yellow },
+            { "blue", Colors.Blue },
+            { "pink", Colors.Pink }
+    };
 
-    public void SaveToFile(string filePath)
+    public void SaveToFile(string filePath, int lenght, int width, string color)
     {
-        using var bitmapContext = new SkiaBitmapExportContext(400, 400, 2.0f);
+        using var bitmapContext = new SkiaBitmapExportContext(lenght, width, 2.0f);
         var canvas = bitmapContext.Canvas;
         canvas.FontColor = Colors.Black;
-        canvas = Draw(canvas);
+        canvas = Draw(canvas, color);
         using var image = bitmapContext.Image;
         using var stream = File.OpenWrite(filePath);
         image.Save(stream);
     }
 
-    private ICanvas Draw(ICanvas canvas)
+    private ICanvas Draw(ICanvas canvas, string color)
     {
         foreach (var rectInfo in rectangleInformation)
         {
             var rect = rectInfo.rectangle;
             var text = rectInfo.word;
-            canvas.FillColor = Colors.Blue;
             //canvas.FillRectangle(rect.X, rect.Y, rect.Width, rect.Height);
 
             float fontSize = rect.Height;
-            canvas.FontColor = Colors.White;
+            if (!dictColors.TryGetValue(color, out var colorGet))
+                colorGet = Colors.White;
+            canvas.FontColor = colorGet;
             var textBounds = canvas.GetStringSize(text, Font.Default, fontSize);
 
             while ((textBounds.Width > rect.Width || textBounds.Height > rect.Height) && fontSize > 1)

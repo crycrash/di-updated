@@ -52,7 +52,6 @@ public class Program
             var frequencyRectangles = wordHandler.ProcessFile(options.InputFilePath);
             var arrRect = c.Resolve<IRectangleGenerator>().ExecuteRectangles(frequencyRectangles, new Point(options.CenterX, options.CenterY));
             return new DrawingTagsCloud(arrRect);
-
         }).As<IDrawingTagsCloud>().InstancePerDependency();
 
         var container = builder.Build();
@@ -61,7 +60,7 @@ public class Program
         try
         {
             var drawingTagsCloud = scope.Resolve<IDrawingTagsCloud>();
-            drawingTagsCloud.SaveToFile(options.OutputFilePath);
+            drawingTagsCloud.SaveToFile(options.OutputFilePath, options.Lenght, options.Width, options.Color);
 
             Console.WriteLine($"Облако тегов успешно сохранено в файл: {options.OutputFilePath}");
         }

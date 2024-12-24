@@ -27,7 +27,7 @@ public class TestsCloudVisualization
             var rectanglesInfo = new List<RectangleInformation>();
             DrawingTagsCloud drawingTagsCloud = new DrawingTagsCloud(rectanglesInfo);
             var pathToSave = context.Test.MethodName + ".png";
-            drawingTagsCloud.SaveToFile(pathToSave); //сохраняется в bin
+            drawingTagsCloud.SaveToFile(pathToSave, 400, 400, "white"); //сохраняется в bin
             Console.WriteLine($"Tag cloud visualization saved to file {pathToSave}");
         }
     }
