@@ -3,10 +3,10 @@ namespace ConsoleClient;
 
 public class Options
 {
-    [Option('i', "input", Default = "/Users/milana/di-updated/DrawingTagsCloudVisualization/example.txt", HelpText = "Путь к входному текстовому файлу.")]
+    [Option('i', "input", Default = "example.txt", HelpText = "Путь к входному текстовому файлу.")]
     public required string InputFilePath { get; set; }
 
-    [Option('o', "output", Default = "/Users/milana/di-updated/DrawingTagsCloudVisualization/example.png", HelpText = "Путь к выходному изображению.")]
+    [Option('o', "output", Default = "example.png", HelpText = "Путь к выходному изображению.")]
     public required string OutputFilePath { get; set; }
 
     [Option('x', "centerX", Default = 200, HelpText = "Координата X центра.")]

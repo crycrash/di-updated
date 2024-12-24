@@ -1,4 +1,5 @@
 using System.Drawing;
+using TagsCloudVisualization.ManagingRendering;
 
 namespace TagsCloudVisualization;
 
@@ -8,8 +9,8 @@ public interface IRectangleGenerator
 }
 public class RectangleGenerator : IRectangleGenerator
 {
-    private static List<RectangleInformation> rectangleInformation = [];
-    private static Dictionary<string, Size> rectangleData = [];
+    private static readonly List<RectangleInformation> rectangleInformation = [];
+    private static readonly Dictionary<string, Size> rectangleData = [];
     private static void GenerateRectangles(Dictionary<string, int> frequencyRectangles)
     {
         var totalCountWords = frequencyRectangles.Sum(x => x.Value);

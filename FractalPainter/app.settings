@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<AppSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ImagesDirectory>.</ImagesDirectory>
-  <ImageSettings>
-    <Width>300</Width>
-    <Height>300</Height>
-  </ImageSettings>
-</AppSettings>

@@ -2,14 +2,8 @@ using System.Drawing;
 
 namespace TagsCloudVisualization;
 
-public class RectangleInformation
+public class RectangleInformation(Rectangle rectangle, string word)
 {
-    public readonly Rectangle rectangle;
-    public readonly string word;
-
-    public RectangleInformation(Rectangle rectangle, string word)
-    {
-        this.word = word;
-        this.rectangle = rectangle;
-    }
+    public readonly Rectangle rectangle = rectangle;
+    public readonly string word = word;
 }

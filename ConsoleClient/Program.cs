@@ -3,6 +3,7 @@ using Autofac;
 using CommandLine;
 using DrawingTagsCloudVisualization;
 using TagsCloudVisualization;
+using TagsCloudVisualization.FilesProcessing;
 
 namespace ConsoleClient;
 
@@ -23,7 +24,7 @@ public class Program
         {
             var mystem = new MyStemWrapper.MyStem
             {
-                PathToMyStem = "/Users/milana/di-updated/TagsCloudVisualization/mystem", // укоротить
+                PathToMyStem = "mystem",
                 Parameters = "-ni"
             };
             return mystem;

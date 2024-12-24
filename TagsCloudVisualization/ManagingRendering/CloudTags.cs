@@ -1,34 +1,27 @@
 using System.Drawing;
 
-namespace TagsCloudVisualization;
+namespace TagsCloudVisualization.ManagingRendering;
 
-public class CircularCloudLayouter
+public class CircularCloudLayouter(Point center)
 {
-    private ArchimedeanSpiral spiral;
-    private Point centerСloud;
+    private ArchimedeanSpiral spiral = new ArchimedeanSpiral(center);
+    private Point centerСloud = center;
 
-    private List<Rectangle> rectangles;
+    private List<Rectangle> rectangles = [];
 
     public Point CenterCloud => centerСloud;
 
     public List<Rectangle> GetRectangles => rectangles;
 
-    public CircularCloudLayouter(Point center)
-    {
-        this.centerСloud = center;
-        this.spiral = new ArchimedeanSpiral(center);
-        this.rectangles = new List<Rectangle>();
-    }
-
     public Rectangle PutNextRectangle(Size rectangleSize)
     {
         if (rectangleSize.IsEmpty)
         {
-            throw new ArgumentNullException("rectangle is empty");
+            throw new ArgumentNullException(nameof(rectangleSize), "rectangle is empty");
         }
         if (rectangleSize.Height <= 0 || rectangleSize.Width <= 0)
         {
-            throw new ArgumentOutOfRangeException("side less or equal zero");
+            throw new ArgumentOutOfRangeException(nameof(rectangleSize), "side less or equal zero");
         }
         Rectangle tempRectangle;
         do

@@ -20,7 +20,6 @@ public class DrawingTagsCloud : IDrawingTagsCloud
     public void SaveToFile(string filePath)
     {
         using var bitmapContext = new SkiaBitmapExportContext(400, 400, 2.0f);
-
         var canvas = bitmapContext.Canvas;
         canvas.FontColor = Colors.Black;
         canvas = Draw(canvas);

@@ -1,9 +1,9 @@
-using NUnit.Framework;
 using FluentAssertions;
 using System.Drawing;
-using TagsCloudVisualization;
+using TagsCloudVisualization.ManagingRendering;
 using NUnit.Framework.Interfaces;
 using DrawingTagsCloudVisualization;
+using TagsCloudVisualization;
 
 
 namespace TagsCloudVisualizationTests;
@@ -24,9 +24,8 @@ public class TestsCloudVisualization
         var context = TestContext.CurrentContext;
         if (context.Result.Outcome == ResultState.Failure)
         {
-            DrawingTagsCloud drawingTagsCloud = new DrawingTagsCloud(new Point(circularCloudLayouter.CenterCloud.X * 2,
-                                                                    circularCloudLayouter.CenterCloud.Y * 2),
-                                                                    circularCloudLayouter.GetRectangles);
+            var rectanglesInfo = new List<RectangleInformation>();
+            DrawingTagsCloud drawingTagsCloud = new DrawingTagsCloud(rectanglesInfo);
             var pathToSave = context.Test.MethodName + ".png";
             drawingTagsCloud.SaveToFile(pathToSave); //сохраняется в bin
             Console.WriteLine($"Tag cloud visualization saved to file {pathToSave}");
