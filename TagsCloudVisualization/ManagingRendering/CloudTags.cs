@@ -2,10 +2,14 @@ using System.Drawing;
 
 namespace TagsCloudVisualization.ManagingRendering;
 
-public class CircularCloudLayouter(Point center)
+public class CircularCloudLayouter
 {
-    private ArchimedeanSpiral spiral = new ArchimedeanSpiral(center);
-    private Point centerСloud = center;
+    public CircularCloudLayouter(ISpiral spiral, Point center){
+        this.spiral = spiral;
+        this.centerСloud = center;
+    }
+    private Point centerСloud;
+    private readonly ISpiral spiral;
 
     private List<Rectangle> rectangles = [];
 

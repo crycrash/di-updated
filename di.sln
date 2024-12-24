@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # 
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "di", "FractalPainter\di.csproj", "{4B70F6B3-5C20-40D2-BFC9-D95C18D65DD6}"
-EndProject
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawingTagsCloudVisualization", "DrawingTagsCloudVisualization\DrawingTagsCloudVisualization.csproj", "{ED288448-602B-4CC4-9A3F-6826B7C4A750}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagsCloudVisualization", "TagsCloudVisualization\TagsCloudVisualization.csproj", "{37F47827-A9ED-4FDD-97DC-418F5221521A}"
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4B70F6B3-5C20-40D2-BFC9-D95C18D65DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B70F6B3-5C20-40D2-BFC9-D95C18D65DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B70F6B3-5C20-40D2-BFC9-D95C18D65DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B70F6B3-5C20-40D2-BFC9-D95C18D65DD6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED288448-602B-4CC4-9A3F-6826B7C4A750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED288448-602B-4CC4-9A3F-6826B7C4A750}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED288448-602B-4CC4-9A3F-6826B7C4A750}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,5 +33,8 @@ Global
 		{9947D364-443F-43AB-A764-ED71B0DF06A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9947D364-443F-43AB-A764-ED71B0DF06A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9947D364-443F-43AB-A764-ED71B0DF06A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

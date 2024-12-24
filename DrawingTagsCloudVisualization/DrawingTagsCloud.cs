@@ -20,7 +20,8 @@ public class DrawingTagsCloud(List<RectangleInformation> rectangleInformation) :
             { "green", Colors.Green },
             { "yellow", Colors.Yellow },
             { "blue", Colors.Blue },
-            { "pink", Colors.Pink }
+            { "pink", Colors.Pink },
+            { "black", Colors.Black },
     };
 
     public void SaveToFile(string filePath, int lenght, int width, string color)
@@ -44,7 +45,7 @@ public class DrawingTagsCloud(List<RectangleInformation> rectangleInformation) :
 
             float fontSize = rect.Height;
             if (!dictColors.TryGetValue(color, out var colorGet))
-                colorGet = Colors.White;
+                colorGet = Colors.Black;
             canvas.FontColor = colorGet;
             var textBounds = canvas.GetStringSize(text, Font.Default, fontSize);
 

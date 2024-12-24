@@ -21,6 +21,9 @@ public class Options
     [Option('w', "width", Default = 400, HelpText = "Ширина изображения")]
     public int Width{ get; set; }
 
-    [Option('c', "color", Default = "white", HelpText = "Цвет текста")]
+    [Option('c', "color", Default = "black", HelpText = "Цвет текста")]
     public string Color{ get; set; }
+
+    [Option('a', "algoritm", Default = "Circle", HelpText = "Алгоритм(квадрат, круг)")]
+    public string Algorithm{ get; set; }
 }

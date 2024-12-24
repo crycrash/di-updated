@@ -7,8 +7,9 @@ public interface IRectangleGenerator
 {
     public List<RectangleInformation> ExecuteRectangles(Dictionary<string, int> frequencyRectangles, Point center);
 }
-public class RectangleGenerator : IRectangleGenerator
+public class RectangleGenerator(ISpiral spiral) : IRectangleGenerator
 {
+    readonly ISpiral spiral = spiral;
     private static readonly List<RectangleInformation> rectangleInformation = [];
     private static readonly Dictionary<string, Size> rectangleData = [];
     private static void GenerateRectangles(Dictionary<string, int> frequencyRectangles)
@@ -17,15 +18,15 @@ public class RectangleGenerator : IRectangleGenerator
         var sortedWords = frequencyRectangles.OrderByDescending(word => word.Value);
         foreach (var word in sortedWords)
         {
-            var width = word.Value * 300 / totalCountWords;
-            var height = word.Value * 170 / totalCountWords;
+            var width = word.Value * 500 / totalCountWords;
+            var height = word.Value * 300 / totalCountWords;
             var rectangleSize = new Size(Math.Max(width, 1), Math.Max(height, 1));
             rectangleData.Add(word.Key, rectangleSize);
         }
     }
-    private static List<RectangleInformation> PutRectangles(Point center)
+    private List<RectangleInformation> PutRectangles(Point center)
     {
-        var layouter = new CircularCloudLayouter(center);
+        var layouter = new CircularCloudLayouter(spiral, center);
         foreach (var rect in rectangleData)
         {
             var tempRect = layouter.PutNextRectangle(rect.Value);

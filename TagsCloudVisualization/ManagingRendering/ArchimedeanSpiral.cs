@@ -2,7 +2,7 @@ using System.Drawing;
 
 namespace TagsCloudVisualization.ManagingRendering;
 
-public class ArchimedeanSpiral
+public class ArchimedeanSpiral : ISpiral
 {
     private readonly Point startPoint;
     private readonly double radiusStep;
@@ -13,10 +13,10 @@ public class ArchimedeanSpiral
     {
         if (radiusStep <= 0) throw new ArgumentOutOfRangeException(nameof(radiusStep), "radius step must be positive");
 
-        this.angleStep = Math.PI / 180;
+        angleStep = Math.PI / 180;
         this.startPoint = startPoint;
         this.radiusStep = radiusStep;
-        this.currentAngle = 0;
+        currentAngle = 0;
     }
 
     public Point GetNextPoint()

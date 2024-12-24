@@ -4,6 +4,7 @@ using CommandLine;
 using DrawingTagsCloudVisualization;
 using TagsCloudVisualization;
 using TagsCloudVisualization.FilesProcessing;
+using TagsCloudVisualization.ManagingRendering;
 
 namespace ConsoleClient;
 
@@ -41,6 +42,15 @@ public class Program
         builder.RegisterType<RectangleGenerator>()
             .As<IRectangleGenerator>()
             .InstancePerDependency();
+
+        builder.Register<ISpiral>(c =>
+        {
+            if (options.Algorithm.Equals("Circle", StringComparison.OrdinalIgnoreCase))
+            {
+                return new ArchimedeanSpiral(new Point(options.CenterX, options.CenterY), 1);
+            }
+            return new FermatSpiral(new Point(options.CenterX, options.CenterY), 20);
+        }).As<ISpiral>().InstancePerDependency();
 
         builder.RegisterType<WordHandler>()
             .As<IWordHandler>()

@@ -5,15 +5,19 @@ Agrs: dotnet run
 
 # 2 example:
 
-Args: dotnet run -- -o example1.png -l 500 -w 500
+Args: dotnet run -- -o Examples/example1.png -l 500 -w 500
 ![alt text](example1.png)
 
 # 3 example:
 
-Args: dotnet run -- -o example2.png -x 150 -y 300
+Args: dotnet run -- -o Examples/example2.png -x 150 -y 300
 ![alt text](example2.png)
 
 # 4 example:
 
 Args: dotnet run -- -c pink -o Examples/example3.png
 ![alt text](example3.png)
+
+# 5 example:
+Args: dotnet run -- -a Fermat -o Examples/example4.png
+![alt text](example4.png)
