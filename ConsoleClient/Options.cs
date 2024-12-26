@@ -15,8 +15,8 @@ public class Options
     [Option('y', "centerY", Default = 200, HelpText = "Координата Y центра.")]
     public int CenterY { get; set; }
 
-    [Option('l', "lenght", Default = 400, HelpText = "Длина изображения")]
-    public int Lenght { get; set; }
+    [Option('l', "length", Default = 400, HelpText = "Длина изображения")]
+    public int Length { get; set; }
 
     [Option('w', "width", Default = 400, HelpText = "Ширина изображения")]
     public int Width{ get; set; }
@@ -24,6 +24,6 @@ public class Options
     [Option('c', "color", Default = "black", HelpText = "Цвет текста")]
     public string Color{ get; set; }
 
-    [Option('a', "algoritm", Default = "Circle", HelpText = "Алгоритм(квадрат, круг)")]
+    [Option('a', "algorithm", Default = "Circle", HelpText = "Алгоритм(квадрат, круг)")]
     public string Algorithm{ get; set; }
 }

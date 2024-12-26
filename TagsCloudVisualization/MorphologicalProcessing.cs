@@ -1,11 +1,6 @@
 using MyStemWrapper;
 namespace TagsCloudVisualization;
 
-public interface IMorphologicalAnalyzer
-{
-    bool IsExcludedWord(string word);
-}
-
 public class MorphologicalProcessing : IMorphologicalAnalyzer
 {
     private readonly MyStem _mystem;

@@ -1,18 +1,11 @@
-using System.Runtime.CompilerServices;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Graphics.Skia;
-using Microsoft.VisualBasic;
 using TagsCloudVisualization;
 
 namespace DrawingTagsCloudVisualization;
 
-public interface IDrawingTagsCloud
+public class TagsCloudDrawer() : ITagsCloudDrawer
 {
-    public void SaveToFile(string filePath, int lenght, int width, string color);
-}
-public class DrawingTagsCloud(List<RectangleInformation> rectangleInformation) : IDrawingTagsCloud
-{
-    private readonly List<RectangleInformation> rectangleInformation = rectangleInformation;
 
     private readonly Dictionary<string, Color> dictColors = new(){
             { "white", Colors.White },
@@ -24,18 +17,7 @@ public class DrawingTagsCloud(List<RectangleInformation> rectangleInformation) :
             { "black", Colors.Black },
     };
 
-    public void SaveToFile(string filePath, int lenght, int width, string color)
-    {
-        using var bitmapContext = new SkiaBitmapExportContext(lenght, width, 2.0f);
-        var canvas = bitmapContext.Canvas;
-        canvas.FontColor = Colors.Black;
-        canvas = Draw(canvas, color);
-        using var image = bitmapContext.Image;
-        using var stream = File.OpenWrite(filePath);
-        image.Save(stream);
-    }
-
-    private ICanvas Draw(ICanvas canvas, string color)
+    public ICanvas Draw(ICanvas canvas, string color, List<RectangleInformation> rectangleInformation)
     {
         foreach (var rectInfo in rectangleInformation)
         {

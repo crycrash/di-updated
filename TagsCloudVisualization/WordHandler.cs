@@ -1,10 +1,6 @@
 using TagsCloudVisualization.FilesProcessing;
 namespace TagsCloudVisualization;
 
-public interface IWordHandler
-{
-    public Dictionary<string, int> ProcessFile(string filePath);
-}
 public class WordHandler : IWordHandler
 {
     public WordHandler(IMorphologicalAnalyzer morphologicalAnalyzer, IFileProcessor fileProcessor)

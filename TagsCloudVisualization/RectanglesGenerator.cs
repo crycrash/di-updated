@@ -3,10 +3,6 @@ using TagsCloudVisualization.ManagingRendering;
 
 namespace TagsCloudVisualization;
 
-public interface IRectangleGenerator
-{
-    public List<RectangleInformation> ExecuteRectangles(Dictionary<string, int> frequencyRectangles, Point center);
-}
 public class RectangleGenerator(ISpiral spiral) : IRectangleGenerator
 {
     readonly ISpiral spiral = spiral;

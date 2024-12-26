@@ -1,12 +1,8 @@
-using System.Drawing;
 using Autofac;
 using CommandLine;
-using DrawingTagsCloudVisualization;
-using TagsCloudVisualization;
-using TagsCloudVisualization.FilesProcessing;
-using TagsCloudVisualization.ManagingRendering;
 
 namespace ConsoleClient;
+
 
 public class Program
 {
@@ -19,59 +15,18 @@ public class Program
 
     private static void RunApplication(Options options)
     {
-        var builder = new ContainerBuilder();
-
-        builder.Register(c =>
+        if (options.Algorithm != "Circle" && options.Algorithm != "Fermat")
         {
-            var mystem = new MyStemWrapper.MyStem
-            {
-                PathToMyStem = "mystem",
-                Parameters = "-ni"
-            };
-            return mystem;
-        }).As<MyStemWrapper.MyStem>().SingleInstance();
+            Console.WriteLine($"Ошибка: Неизвестный алгоритм '{options.Algorithm}'. Допустимые значения: 'Circle', 'Fermat'.");
+            return;
+        }
 
-        builder.RegisterType<MorphologicalProcessing>()
-            .As<IMorphologicalAnalyzer>()
-            .InstancePerDependency();
-
-        builder.RegisterType<TxtFileProcessor>()
-            .As<IFileProcessor>()
-            .InstancePerDependency();
-
-        builder.RegisterType<RectangleGenerator>()
-            .As<IRectangleGenerator>()
-            .InstancePerDependency();
-
-        builder.Register<ISpiral>(c =>
-        {
-            if (options.Algorithm.Equals("Circle", StringComparison.OrdinalIgnoreCase))
-            {
-                return new ArchimedeanSpiral(new Point(options.CenterX, options.CenterY), 1);
-            }
-            return new FermatSpiral(new Point(options.CenterX, options.CenterY), 20);
-        }).As<ISpiral>().InstancePerDependency();
-
-        builder.RegisterType<WordHandler>()
-            .As<IWordHandler>()
-            .InstancePerDependency();
-
-        builder.Register(c =>
-        {
-            var wordHandler = c.Resolve<IWordHandler>();
-            var frequencyRectangles = wordHandler.ProcessFile(options.InputFilePath);
-            var arrRect = c.Resolve<IRectangleGenerator>().ExecuteRectangles(frequencyRectangles, new Point(options.CenterX, options.CenterY));
-            return new DrawingTagsCloud(arrRect);
-        }).As<IDrawingTagsCloud>().InstancePerDependency();
-
-        var container = builder.Build();
+        var container = DependencyInjectionConfig.BuildContainer(options);
 
         using var scope = container.BeginLifetimeScope();
         try
         {
-            var drawingTagsCloud = scope.Resolve<IDrawingTagsCloud>();
-            drawingTagsCloud.SaveToFile(options.OutputFilePath, options.Lenght, options.Width, options.Color);
-
+            scope.Resolve<ITagsCloudDrawingFacade>().DrawRectangle(options);
             Console.WriteLine($"Облако тегов успешно сохранено в файл: {options.OutputFilePath}");
         }
         catch (Exception ex)
@@ -83,5 +38,23 @@ public class Program
     private static void HandleErrors(IEnumerable<Error> errors)
     {
         Console.WriteLine("Ошибка при обработке аргументов командной строки.");
+        foreach (var error in errors)
+        {
+            switch (error)
+            {
+                case UnknownOptionError unknownOptionError:
+                    Console.WriteLine($"- Неизвестный параметр: {unknownOptionError.Token}");
+                    break;
+                case SetValueExceptionError setValueExceptionError:
+                    Console.WriteLine($"- Ошибка установки значения: {setValueExceptionError.Exception.Message}");
+                    break;
+                case MissingValueOptionError missingValueOptionError:
+                    Console.WriteLine($"- Отсутствует значение: {missingValueOptionError.NameInfo}");
+                    break;
+                default:
+                    Console.WriteLine($"- Неизвестная ошибка: {error.GetType().Name}");
+                    break;
+            }
+        }
     }
 }
