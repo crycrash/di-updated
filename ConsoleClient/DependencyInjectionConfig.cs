@@ -30,7 +30,7 @@ public static class DependencyInjectionConfig
         builder.Register<ISpiral>(c =>
         {
             var centerPoint = new Point(options.CenterX, options.CenterY);
-            return options.Algorithm switch
+            return options.AlgorithmForming switch
             {
                 "Circle" => new ArchimedeanSpiral(centerPoint, 1),
                 _ => new FermatSpiral(centerPoint, 20),
@@ -46,9 +46,18 @@ public static class DependencyInjectionConfig
         builder.RegisterType<TagsCloudDrawingFacade>()
             .As<ITagsCloudDrawingFacade>()
             .InstancePerDependency();
-        builder.RegisterType<TagsCloudDrawer>()
-            .As<ITagsCloudDrawer>()
-            .InstancePerDependency();
+
+        switch (options.AlgorithmDrawing)
+        {
+            case "Altering":
+                builder.RegisterType<AlternatingColorsTagsCloudDrawer>().As<ITagsCloudDrawer>()
+                        .InstancePerDependency();
+                break;
+            default:
+                builder.RegisterType<StandartTagsCloudDrawer>().As<ITagsCloudDrawer>()
+                        .InstancePerDependency();
+                break;
+        }
         builder.RegisterType<ImageSaver>()
             .As<IImageSaver>()
             .InstancePerDependency();

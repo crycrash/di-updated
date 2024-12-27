@@ -24,9 +24,12 @@ public class Options
     [Option('c', "color", Default = "black", HelpText = "Цвет текста")]
     public string Color{ get; set; }
 
-    [Option('a', "algorithm", Default = "Circle", HelpText = "Алгоритм(квадрат, круг)")]
-    public string Algorithm{ get; set; }
+    [Option('a', "algorithmf", Default = "Circle", HelpText = "Алгоритм формирования(квадрат, круг)")]
+    public string AlgorithmForming{ get; set; }
 
     [Option('p', "partofspeech", Default = "all", HelpText = "Часть речи S V A")]
     public string PartOfSpeech{ get; set; }
+
+    [Option('d', "algorithmd", Default = "Standart", HelpText = "Алгоритм рисования(Standart, Altering)")]
+    public string AlgorithmDrawing{ get; set; }
 }

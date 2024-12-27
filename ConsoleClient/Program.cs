@@ -15,16 +15,22 @@ public class Program
 
     private static void RunApplication(Options options)
     {
-        if (options.Algorithm != "Circle" && options.Algorithm != "Fermat")
+        if (options.AlgorithmForming != "Circle" && options.AlgorithmForming != "Fermat")
         {
-            Console.WriteLine($"Ошибка: Неизвестный алгоритм '{options.Algorithm}'. Допустимые значения: 'Circle', 'Fermat'.");
+            Console.WriteLine($"Ошибка: Неизвестный алгоритм '{options.AlgorithmForming}'. Допустимые значения: 'Circle', 'Fermat'.");
             return;
         }
-        
-        if (options.PartOfSpeech != "all" && options.PartOfSpeech != "S" && options.PartOfSpeech != "V" 
+
+        if (options.PartOfSpeech != "all" && options.PartOfSpeech != "S" && options.PartOfSpeech != "V"
             && options.PartOfSpeech != "A")
         {
             Console.WriteLine($"Ошибка: Неизвестная часть речи '{options.PartOfSpeech}'");
+            return;
+        }
+
+        if (options.AlgorithmDrawing != "Standart" && options.AlgorithmDrawing != "Altering")
+        {
+            Console.WriteLine($"Ошибка: Неизвестный алгоритм рассказки '{options.AlgorithmDrawing}'");
             return;
         }
         var container = DependencyInjectionConfig.BuildContainer(options);

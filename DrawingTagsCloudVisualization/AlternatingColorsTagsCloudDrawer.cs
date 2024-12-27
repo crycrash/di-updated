@@ -3,7 +3,7 @@ using TagsCloudVisualization;
 
 namespace DrawingTagsCloudVisualization;
 
-public class StandartTagsCloudDrawer() : ITagsCloudDrawer
+public class AlternatingColorsTagsCloudDrawer() : ITagsCloudDrawer
 {
     private readonly List<Color> colors = new List<Color>
         {
