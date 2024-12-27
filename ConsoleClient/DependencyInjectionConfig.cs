@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Runtime.InteropServices;
 using Autofac;
 using DrawingTagsCloudVisualization;
 using TagsCloudVisualization;
@@ -12,10 +13,14 @@ public static class DependencyInjectionConfig
     public static IContainer BuildContainer(Options options)
     {
         var builder = new ContainerBuilder();
-
+        var pathToMystem = "";
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            pathToMystem = "mystem.exe";
+        else
+            pathToMystem = "mystem";
         builder.RegisterInstance(new MyStemWrapper.MyStem
         {
-            PathToMyStem = "mystem",
+            PathToMyStem = pathToMystem,
             Parameters = "-ni"
         }).As<MyStemWrapper.MyStem>().SingleInstance();
 
