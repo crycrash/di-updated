@@ -26,9 +26,9 @@ public class TestsCloudVisualization
         if (context.Result.Outcome == ResultState.Failure)
         {
             var rectanglesInfo = new List<RectangleInformation>();
-            ImageSaver drawingTagsCloud = new ImageSaver(new Ta);
+            ImageSaver drawingTagsCloud = new(new StandartTagsCloudDrawer());
             var pathToSave = context.Test.MethodName + ".png";
-            drawingTagsCloud.SaveToFile(pathToSave, 400, 400, "white"); //сохраняется в bin
+            drawingTagsCloud.SaveToFile(pathToSave, 400, 400, "white", rectanglesInfo); //сохраняется в bin
             Console.WriteLine($"Tag cloud visualization saved to file {pathToSave}");
         }
     }
@@ -36,7 +36,8 @@ public class TestsCloudVisualization
     [Test]
     public void CircularCloudLayouter_SettingCenter()
     {
-        CircularCloudLayouter circularLayouter = new CircularCloudLayouter(new Point(2, 4));
+        var center = new Point(2, 4);
+        CircularCloudLayouter circularLayouter = new CircularCloudLayouter(new ArchimedeanSpiral(center), center);
         circularLayouter.CenterCloud.X.Should().Be(2);
         circularLayouter.CenterCloud.Y.Should().Be(4);
     }
@@ -44,7 +45,8 @@ public class TestsCloudVisualization
     [Test]
     public void CircularCloudLayouter_StartWithoutExceptions()
     {
-        Action action = new Action(() => new CircularCloudLayouter(new Point(2, 6)));
+        var center = new Point(2, 6);
+        Action action = new Action(() => new CircularCloudLayouter(new ArchimedeanSpiral(center), center));
         action.Should().NotThrow();
     }
 
