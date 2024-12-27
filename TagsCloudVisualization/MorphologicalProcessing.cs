@@ -1,23 +1,37 @@
+using System.Text.RegularExpressions;
 using MyStemWrapper;
+
 namespace TagsCloudVisualization;
 
-public class MorphologicalProcessing : IMorphologicalAnalyzer
+public class MorphologicalProcessing(MyStem mystem) : IMorphologicalAnalyzer
 {
-    private readonly MyStem _mystem;
+    private readonly MyStem _mystem = mystem;
 
-    public MorphologicalProcessing(MyStem mystem)
+    public bool IsExcludedWord(string word, string excludedPartOfSpeech)
     {
-        _mystem = mystem;
+        var analysisResult = _mystem.Analysis(word);
+
+        if (string.IsNullOrWhiteSpace(excludedPartOfSpeech))
+        {
+            return ContainsPartOfSpeech(analysisResult, ["CONJ", "INTJ", "PART", "PR", "SPRO", "COM"]);
+        }
+        var excludedParts = excludedPartOfSpeech.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                                .Select(part => part.Trim().ToUpper())
+                                                .ToArray();
+
+        return ContainsPartOfSpeech(analysisResult, [.. excludedParts, "CONJ", "INTJ", "PART", "PR", "SPRO", "COM"]);
     }
 
-    public bool IsExcludedWord(string word, string option)
+    private static bool ContainsPartOfSpeech(string analysisResult, string[] partsOfSpeech)
     {
-        var res = _mystem.Analysis(word);
-        if (option.Equals("all"))
-            return res.Contains("CONJ") || res.Contains("INTJ") || res.Contains("PART")
-                || res.Contains("PR") || res.Contains("SPRO");
-        else
-            return !res.Contains(option) || res.Contains("CONJ") || res.Contains("INTJ") || res.Contains("PART")
-                || res.Contains("PR") || res.Contains("SPRO");
+        foreach (var part in partsOfSpeech)
+        {
+            var regex = $@"\b.*?={Regex.Escape(part)}\W";
+            if (Regex.IsMatch(analysisResult, regex, RegexOptions.IgnoreCase))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

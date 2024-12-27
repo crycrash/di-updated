@@ -2,5 +2,5 @@ namespace TagsCloudVisualization;
 
 public interface IMorphologicalAnalyzer
 {
-    bool IsExcludedWord(string word, string option);
+    bool IsExcludedWord(string word, string excludedPartOfSpeech);
 }

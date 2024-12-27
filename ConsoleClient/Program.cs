@@ -12,6 +12,10 @@ public class Program
             .WithParsed(RunApplication)
             .WithNotParsed(HandleErrors);
     }
+    readonly static private HashSet<string> validPartsOfSpeech =
+        [
+            "S", "V", "A", "ADV", "NUM", "SPRO", "ADVPRO", "ANUM"
+        ];
 
     private static void RunApplication(Options options)
     {
@@ -20,14 +24,19 @@ public class Program
             Console.WriteLine($"Ошибка: Неизвестный алгоритм '{options.AlgorithmForming}'. Допустимые значения: 'Circle', 'Fermat'.");
             return;
         }
-
-        if (options.PartOfSpeech != "all" && options.PartOfSpeech != "S" && options.PartOfSpeech != "V"
-            && options.PartOfSpeech != "A")
+        if (!string.IsNullOrEmpty(options.ExcludedPartOfSpeech))
         {
-            Console.WriteLine($"Ошибка: Неизвестная часть речи '{options.PartOfSpeech}'");
-            return;
-        }
+            var excludedParts = options.ExcludedPartOfSpeech.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                                            .Select(part => part.Trim().ToUpper());
 
+            var invalidParts = excludedParts.Where(part => !validPartsOfSpeech.Contains(part)).ToList();
+
+            if (invalidParts.Count != 0)
+            {
+                Console.WriteLine($"Ошибка: Неизвестные части речи '{string.Join(", ", invalidParts)}'");
+                return;
+            }
+        }
         if (options.AlgorithmDrawing != "Standart" && options.AlgorithmDrawing != "Altering")
         {
             Console.WriteLine($"Ошибка: Неизвестный алгоритм рассказки '{options.AlgorithmDrawing}'");

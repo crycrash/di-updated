@@ -15,7 +15,8 @@ public class TestsCloudVisualization
     [SetUp]
     public void SetUp()
     {
-        circularCloudLayouter = new CircularCloudLayouter(new Point(0, 0));
+        var startPoint = new Point(0, 0);
+        circularCloudLayouter = new CircularCloudLayouter(new ArchimedeanSpiral(startPoint), startPoint);
     }
 
     [TearDown]
@@ -25,7 +26,7 @@ public class TestsCloudVisualization
         if (context.Result.Outcome == ResultState.Failure)
         {
             var rectanglesInfo = new List<RectangleInformation>();
-            DrawingTagsCloud drawingTagsCloud = new DrawingTagsCloud(rectanglesInfo);
+            ImageSaver drawingTagsCloud = new ImageSaver(new Ta);
             var pathToSave = context.Test.MethodName + ".png";
             drawingTagsCloud.SaveToFile(pathToSave, 400, 400, "white"); //сохраняется в bin
             Console.WriteLine($"Tag cloud visualization saved to file {pathToSave}");

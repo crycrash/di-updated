@@ -5,29 +5,27 @@ namespace DrawingTagsCloudVisualization;
 
 public class StandartTagsCloudDrawer() : ITagsCloudDrawer
 {
-    private readonly List<Color> colors = new List<Color>
-        {
-            Colors.White,
-            Colors.Red,
-            Colors.Green,
-            Colors.Yellow,
-            Colors.Blue,
-            Colors.Pink,
-            Colors.Black
-        };
+    private readonly Dictionary<string, Color> dictColors = new(){
+            { "white", Colors.White },
+            { "red", Colors.Red },
+            { "green", Colors.Green },
+            { "yellow", Colors.Yellow },
+            { "blue", Colors.Blue },
+            { "pink", Colors.Pink },
+            { "black", Colors.Black },
+    };
 
     public ICanvas Draw(ICanvas canvas, string color, List<RectangleInformation> rectangleInformation)
     {
-        for (int i = 0; i < rectangleInformation.Count; i++)
+        foreach (var rectInfo in rectangleInformation)
         {
-            var rectInfo = rectangleInformation[i];
             var rect = rectInfo.rectangle;
             var text = rectInfo.word;
 
-            var currentColor = colors[i % colors.Count];
-            canvas.FontColor = currentColor;
-
             float fontSize = rect.Height;
+            if (!dictColors.TryGetValue(color, out var colorGet))
+                colorGet = Colors.Black;
+            canvas.FontColor = colorGet;
             var textBounds = canvas.GetStringSize(text, Font.Default, fontSize);
 
             while ((textBounds.Width > rect.Width || textBounds.Height > rect.Height) && fontSize > 1)

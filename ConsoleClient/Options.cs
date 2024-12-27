@@ -27,8 +27,8 @@ public class Options
     [Option('a', "algorithmf", Default = "Circle", HelpText = "Алгоритм формирования(квадрат, круг)")]
     public string AlgorithmForming{ get; set; }
 
-    [Option('p', "partofspeech", Default = "all", HelpText = "Часть речи S V A")]
-    public string PartOfSpeech{ get; set; }
+    [Option('p', "excludedpartofspeech", Required = false, HelpText = "Исключить часть речи S V A ADV NUM SPRO ANUM ADVPRO")]
+    public string ExcludedPartOfSpeech{ get; set; }
 
     [Option('d', "algorithmd", Default = "Standart", HelpText = "Алгоритм рисования(Standart, Altering)")]
     public string AlgorithmDrawing{ get; set; }
