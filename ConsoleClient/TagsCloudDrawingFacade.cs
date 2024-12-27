@@ -14,7 +14,7 @@ public class TagsCloudDrawingFacade(
 
     public void DrawRectangle(Options options)
     {
-        var frequencyRectangles = _wordHandler.ProcessFile(options.InputFilePath);
+        var frequencyRectangles = _wordHandler.ProcessFile(options.InputFilePath, options.PartOfSpeech);
         var arrRect = _rectangleGenerator.ExecuteRectangles(frequencyRectangles, new Point(options.CenterX, options.CenterY));
         _imageSaver.SaveToFile(options.OutputFilePath, options.Length, options.Width, options.Color, arrRect);
     }

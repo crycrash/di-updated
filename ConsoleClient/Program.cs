@@ -20,7 +20,13 @@ public class Program
             Console.WriteLine($"Ошибка: Неизвестный алгоритм '{options.Algorithm}'. Допустимые значения: 'Circle', 'Fermat'.");
             return;
         }
-
+        
+        if (options.PartOfSpeech != "all" && options.PartOfSpeech != "S" && options.PartOfSpeech != "V" 
+            && options.PartOfSpeech != "A")
+        {
+            Console.WriteLine($"Ошибка: Неизвестная часть речи '{options.PartOfSpeech}'");
+            return;
+        }
         var container = DependencyInjectionConfig.BuildContainer(options);
 
         using var scope = container.BeginLifetimeScope();

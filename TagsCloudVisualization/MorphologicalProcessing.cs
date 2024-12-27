@@ -10,10 +10,14 @@ public class MorphologicalProcessing : IMorphologicalAnalyzer
         _mystem = mystem;
     }
 
-    public bool IsExcludedWord(string word)
+    public bool IsExcludedWord(string word, string option)
     {
         var res = _mystem.Analysis(word);
-        return res.Contains("CONJ") || res.Contains("INTJ") || res.Contains("PART")
-               || res.Contains("PR") || res.Contains("SPRO");
+        if (option.Equals("all"))
+            return res.Contains("CONJ") || res.Contains("INTJ") || res.Contains("PART")
+                || res.Contains("PR") || res.Contains("SPRO");
+        else
+            return !res.Contains(option) || res.Contains("CONJ") || res.Contains("INTJ") || res.Contains("PART")
+                || res.Contains("PR") || res.Contains("SPRO");
     }
 }

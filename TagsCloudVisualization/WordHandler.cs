@@ -12,14 +12,14 @@ public class WordHandler : IWordHandler
     private readonly IMorphologicalAnalyzer _morphologicalAnalyzer;
     private readonly IFileProcessor _fileProcessor;
 
-    public Dictionary<string, int> ProcessFile(string filePath)
+    public Dictionary<string, int> ProcessFile(string filePath, string option)
     {
         var words = _fileProcessor.ReadWords(filePath);
 
         foreach (var word in words)
         {
             var normalizedWord = word.ToLower();
-            if (!_morphologicalAnalyzer.IsExcludedWord(word))
+            if (!_morphologicalAnalyzer.IsExcludedWord(word, option))
             {
                 if (keyValueWords.ContainsKey(normalizedWord))
                     keyValueWords[normalizedWord]++;

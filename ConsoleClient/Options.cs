@@ -26,4 +26,7 @@ public class Options
 
     [Option('a', "algorithm", Default = "Circle", HelpText = "Алгоритм(квадрат, круг)")]
     public string Algorithm{ get; set; }
+
+    [Option('p', "partofspeech", Default = "all", HelpText = "Часть речи S V A")]
+    public string PartOfSpeech{ get; set; }
 }
